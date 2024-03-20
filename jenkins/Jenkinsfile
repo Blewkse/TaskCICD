@@ -4,18 +4,21 @@ pipeline {
     stages {
         stage('Prettier') {
             steps {
+                sh 'cd backend'
                 sh 'pnpm install'
                 sh 'pnpm run prettier:check'
             }
         }
         stage('ESLint') {
             steps {
+                sh 'cd backend'
                 sh 'pnpm install'
                 sh 'pnpm run lint'
             }
         }
         stage('Build') {
             steps {
+                sh 'cd backend'
                 sh 'pnpm install'
                 sh 'pnpm run build'
             }
