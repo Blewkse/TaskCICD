@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { updateTask, deleteTask } from "../services/api";
-
-type Task = {
-  title: string;
-  id: number;
-  description: string;
-  completed: boolean;
-};
+import { Task } from "../types/Tasks";
 
 export default function Task({ title, id, description, completed }: Task) {
   const [isEditting, setIsEditting] = useState(false);
