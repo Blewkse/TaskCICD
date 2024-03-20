@@ -9,27 +9,37 @@ type Props = {
 
 export default function TaskItem({ task, onEdit, onDelete }: Props) {
   const [isEditting, setIsEditting] = useState(false);
+  const [activeTask, setActiveTask] = useState(task);
 
   const handleValidation = () => {
     setIsEditting(false);
-    const editedTask: Task = {
-      name: task.name,
-      id: task.id,
-      description: task.description,
-      completed: task.completed,
-    };
-    onEdit(editedTask);
+    onEdit(activeTask);
   };
 
   return (
     <div>
-      <input disabled={!isEditting} value={task.name}></input>
+      <input
+        disabled={!isEditting}
+        value={activeTask.name}
+        onChange={(event) => {
+          setActiveTask({ ...task, name: event.target.value });
+        }}
+      ></input>
       <div>
-        <textarea disabled={!isEditting} value={task.description}></textarea>
+        <textarea
+          disabled={!isEditting}
+          value={activeTask.description}
+          onChange={(event) => {
+            setActiveTask({ ...task, description: event.target.value });
+          }}
+        ></textarea>
         <input
           type="checkbox"
-          checked={task.completed}
+          checked={activeTask.completed}
           disabled={!isEditting}
+          onChange={(event) => {
+            setActiveTask({ ...task, completed: event.target.checked });
+          }}
         />
         <div>
           {isEditting ? (
@@ -39,7 +49,7 @@ export default function TaskItem({ task, onEdit, onDelete }: Props) {
           )}
           <button
             onClick={() => {
-              onDelete(task.id);
+              onDelete(activeTask.id);
             }}
           >
             Delete
