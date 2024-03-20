@@ -1,11 +1,13 @@
 import axios from "axios";
 
-const API_URL = "/api/tasks"; // Remplacez l'URL par l'URL de votre API
+const API_URL = "http://0.0.0.0:3333/tasks"; // Remplacez l'URL par l'URL de votre API
 import Task from "../types/Tasks";
 
 export const getTasks = async (): Promise<Task[]> => {
   try {
     const response = await axios.get(API_URL);
+    console.log("response.data", response.data);
+  
     return response.data;
   } catch (error) {
     console.error("Error fetching tasks:", error);
@@ -45,4 +47,3 @@ export const deleteTask = async (id: number): Promise<void> => {
     throw error;
   }
 };
-

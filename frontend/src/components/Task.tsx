@@ -13,7 +13,7 @@ export default function TaskItem({ task, onEdit, onDelete }: Props) {
   const handleValidation = () => {
     setIsEditting(false);
     const editedTask: Task = {
-      title: task.title,
+      name: task.name,
       id: task.id,
       description: task.description,
       completed: task.completed,
@@ -23,7 +23,7 @@ export default function TaskItem({ task, onEdit, onDelete }: Props) {
 
   return (
     <div>
-      <input disabled={!isEditting} value={task.title}></input>
+      <input disabled={!isEditting} value={task.name}></input>
       <div>
         <textarea disabled={!isEditting} value={task.description}></textarea>
         <input

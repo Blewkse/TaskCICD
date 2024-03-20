@@ -1,5 +1,5 @@
 type Task = {
-  title: string;
+  name: string;
   id: number;
   description: string;
   completed: boolean;
