@@ -9,6 +9,6 @@ RUN corepack prepare pnpm@8.10.2 --activate
  
 RUN pnpm install
  
-EXPOSE 3000
+EXPOSE 5137
 
 CMD [ "pnpm", "run", "dev" ]
