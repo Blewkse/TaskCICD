@@ -8,44 +8,48 @@ type Props = {
 };
 
 export default function TaskItem({ task, onEdit, onDelete }: Props) {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [activeTask, setActiveTask] = useState(task);
 
   const handleValidation = () => {
-    setIsEditting(false);
+    setIsEditing(false);
     onEdit(activeTask);
+  };
+
+  const handleInputChange = (key: keyof Task, value: string | boolean) => {
+    setActiveTask({ ...activeTask, [key]: value });
   };
 
   return (
     <div>
       <input
-        disabled={!isEditting}
+        disabled={!isEditing}
         value={activeTask.name}
         onChange={(event) => {
-          setActiveTask({ ...task, name: event.target.value });
+          handleInputChange("name", event.target.value);
         }}
       ></input>
       <div>
         <textarea
-          disabled={!isEditting}
+          disabled={!isEditing}
           value={activeTask.description}
           onChange={(event) => {
-            setActiveTask({ ...task, description: event.target.value });
+            handleInputChange("description", event.target.value);
           }}
         ></textarea>
         <input
           type="checkbox"
-          checked={activeTask.completed}
-          disabled={!isEditting}
+          checked={activeTask.isCompleted}
+          disabled={!isEditing}
           onChange={(event) => {
-            setActiveTask({ ...task, completed: event.target.checked });
+            handleInputChange("isCompleted", event.target.checked);
           }}
         />
         <div>
-          {isEditting ? (
+          {isEditing ? (
             <button onClick={handleValidation}>Valider</button>
           ) : (
-            <button onClick={() => setIsEditting(true)}>Edit</button>
+            <button onClick={() => setIsEditing(true)}>Edit</button>
           )}
           <button
             onClick={() => {

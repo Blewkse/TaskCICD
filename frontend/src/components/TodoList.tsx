@@ -62,8 +62,7 @@ export default function TodoList() {
           onChange={(e) => setNewTaskTitle(e.target.value)}
         />
         <br />
-        <input
-          type="text"
+        <textarea
           value={newTaskDescription}
           onChange={(e) => setNewTaskDescription(e.target.value)}
         />

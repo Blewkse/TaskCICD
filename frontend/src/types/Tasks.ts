@@ -2,7 +2,7 @@ type Task = {
   name: string;
   id: number;
   description: string;
-  completed: boolean;
+  isCompleted: boolean;
 };
 
 export default Task;
