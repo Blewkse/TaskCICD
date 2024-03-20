@@ -1,22 +1,36 @@
 import React, { useState } from "react";
-import { updateTask, deleteTask } from "../services/api";
-import { Task } from "../types/Tasks";
+import Task from "../types/Tasks";
 
-export default function Task({ title, id, description, completed }: Task) {
+type Props = {
+  task: Task;
+  onEdit: (task: Task) => void;
+  onDelete: (id: number) => void;
+};
+
+export default function Task({ task, onEdit, onDelete }: Props) {
   const [isEditting, setIsEditting] = useState(false);
 
   const handleValidation = () => {
     setIsEditting(false);
-    const task: Task = { title, id, description, completed };
-    updateTask(task);
+    const editedTask: Task = {
+      title: task.title,
+      id: task.id,
+      description: task.description,
+      completed: task.completed,
+    };
+    onEdit(editedTask);
   };
 
   return (
     <div>
-      <input disabled={!isEditting} value={title}></input>
+      <input disabled={!isEditting} value={task.title}></input>
       <div>
-        <textarea disabled={!isEditting} value={description}></textarea>
-        <input type="checkbox" checked={completed} disabled={!isEditting} />
+        <textarea disabled={!isEditting} value={task.description}></textarea>
+        <input
+          type="checkbox"
+          checked={task.completed}
+          disabled={!isEditting}
+        />
         <div>
           {isEditting ? (
             <button onClick={handleValidation}>Valider</button>
@@ -25,7 +39,7 @@ export default function Task({ title, id, description, completed }: Task) {
           )}
           <button
             onClick={() => {
-              deleteTask(id);
+              onDelete(task.id);
             }}
           >
             Delete
