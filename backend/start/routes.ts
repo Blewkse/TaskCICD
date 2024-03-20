@@ -7,6 +7,7 @@
 |
 */
 
+const TasksController = () => import('#controllers/tasks_controller')
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
@@ -14,3 +15,4 @@ router.get('/', async () => {
     hello: 'world',
   }
 })
+router.resource('tasks', TasksController).apiOnly()
