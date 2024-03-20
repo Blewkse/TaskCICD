@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/tasks'; // Remplacez l'URL par l'URL de votre API
+const API_URL = '/api/tasks'; // Remplacez l'URL par l'URL de votre API
 
 interface Task {
   id: number;
