@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Prettier') {
+            steps {
+                sh 'pnpm run prettier:check'
+            }
+        }
+        stage('ESLint') {
+            steps {
+                sh 'pnpm run lint'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                sh 'pnpm run build'
+            }
+        }
+    }
+}

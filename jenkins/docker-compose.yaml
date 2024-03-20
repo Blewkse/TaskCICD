@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - jenkins_configuration:/var/jenkins_home
+      - docker_socket:/var/run/docker.sock
+
+  agent:
+    image: jenkins/ssh-agent:jdk11
+    container_name: agent
+    privileged: true
+    user: root
+    expose:
+      - 22
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD1+jorD2AfisSOehRiiEWoAQ4bycMNIbGkjd5eP3GZGrWr7nM/15zI/rke1oWkVeDLJCCKUaMdLPI2YWHrpv23UVHd3evN+Wg8fpxH9TpfI0c+YT8hRHHs5pij4+4NNJj/oVNc4Wu8i/b8XSrQPrq0jPiFl1Eq6aGmvkuL/tAGlY5bGMb28jIFpjkMrhykDvCyMJ255IMKxjM2qaa3/LdKxQ9DqaUhRyQ7NDamXKhUR6dbOomyE1q5IJEzPOFKaiI+0wePfmEtDKgL5klFqODiJsw5SmnqAX8c2nTrcU04QT1HiL3HFFM96ydqv/uBIoL0YMjBcC+9brdNgRxMAxKC4+hpy/mGl+46jHzbd+2UnGofEFJfoBxwSuihLC/wBJkE9qDb+nwbk6c1CLIiheF/vf2btorY+zpQdAyl+P9DAve1p2Qo+Z3pupFvqXrBY0dd4DcEJXnwmnXI+oBJhMpBBpTLlwZofoH1XP5QtbmSxbRtu96qzi2HIOXwY1jM9ls= renaudhusson@Renauds-MacBook-Pro.local
+
+volumes:
+  jenkins_configuration:
+  docker_socket:
