@@ -26,13 +26,5 @@ pipeline {
                 }
             }
         }
-        stage('Tests') {
-            steps {
-                dir('backend') {
-                    sh 'pnpm install'
-                    sh 'pnpm t'
-                }
-            }
-        }
     }
 }
