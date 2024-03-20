@@ -41,3 +41,5 @@ export const deleteTask = async (id: number): Promise<void> => {
     throw error;
   }
 };
+export { Task };
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Task } from "../types/Tasks";
+import Task from "../types/Tasks";
 
 export default function Task({ title, id, description, completed }: Task) {
   const [isEditting, setIsEditting] = useState(false);
