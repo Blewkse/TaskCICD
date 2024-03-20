@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { updateTask, deleteTask } from "../services/api";
 import { Task } from "../types/Tasks";
 
 export default function Task({ title, id, description, completed }: Task) {

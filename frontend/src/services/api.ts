@@ -1,13 +1,7 @@
 import axios from "axios";
 
 const API_URL = "/api/tasks"; // Remplacez l'URL par l'URL de votre API
-
-export type Task = {
-    title: string;
-    id: string;
-    description: string;
-    completed: boolean;
-  };
+import Task from "../types/Tasks";
 
 export const getTasks = async (): Promise<Task[]> => {
   try {

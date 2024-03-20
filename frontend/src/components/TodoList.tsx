@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Task from "./Task";
-import { Task as TaskType, getTasks, addTask, updateTask, deleteTask } from "../services/api";
+import { Task as TaskType, getTasks, addTask} from "../services/api";
 
 export default function TodoList() {
   const [tasks, setTasks] = useState<TaskType[]>([]);
@@ -31,28 +31,6 @@ export default function TodoList() {
     }
   };
 
-  const handleUpdateTask = async (updatedTask: TaskType) => {
-    try {
-      const updatedTaskList = tasks.map(task =>
-        task.id === updatedTask.id ? updatedTask : task
-      );
-      setTasks(updatedTaskList);
-      await updateTask(updatedTask);
-    } catch (error) {
-      console.error("Error updating task:", error);
-    }
-  };
-
-  const handleDeleteTask = async (taskId: number) => {
-    try {
-      await deleteTask(taskId);
-      const updatedTaskList = tasks.filter(task => Number(task.id) !== taskId);
-      setTasks(updatedTaskList);
-    } catch (error) {
-      console.error("Error deleting task:", error);
-    }
-  };
-
   return (
     <div>
       <h1>Todo List</h1>
@@ -69,8 +47,6 @@ export default function TodoList() {
           <Task
             key={task.id}
             {...task}
-            onUpdate={() => handleUpdateTask(task)}
-            onDelete={() => handleDeleteTask(Number(task.id))}
           />
         ))}
       </div>
