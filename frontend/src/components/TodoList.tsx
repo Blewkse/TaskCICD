@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Task from "./Task";
-import { Task as TaskType, getTasks, addTask} from "../services/api";
+import Task from "../types/Tasks";
+import { getTasks, addTask } from "../services/api";
 
 export default function TodoList() {
-  const [tasks, setTasks] = useState<TaskType[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
 
   useEffect(() => {
