@@ -15,9 +15,9 @@ export default class TasksController {
    * Handle form submission to create a new post
    */
   async store({ request }: HttpContext) {
-    const { name, description } = await request.validateUsing(createTaskBodyValidator)
+    const { name, description, isCompleted } = await request.validateUsing(createTaskBodyValidator)
 
-    return Task.create({ name, description })
+    return Task.create({ name, description, isCompleted})
   }
 
   /**
