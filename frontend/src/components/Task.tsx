@@ -7,7 +7,7 @@ type Props = {
   onDelete: (id: number) => void;
 };
 
-export default function Task({ task, onEdit, onDelete }: Props) {
+export default function TaskItem({ task, onEdit, onDelete }: Props) {
   const [isEditting, setIsEditting] = useState(false);
 
   const handleValidation = () => {

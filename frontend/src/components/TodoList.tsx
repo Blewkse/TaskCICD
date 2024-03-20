@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Task from "../types/Tasks";
-import { getTasks, addTask } from "../services/api";
-
+import { getTasks, addTask, deleteTask, updateTask } from "../services/api";
+import TaskItem from "./Task";
 export default function TodoList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -31,6 +31,26 @@ export default function TodoList() {
     }
   };
 
+  const handleEditTask = async (editedTask: Task) => {
+    try {
+      const updatedTask = await updateTask(editedTask);
+      setTasks(
+        tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+      );
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
+  const handleDeleteTask = async (id: number) => {
+    try {
+      await deleteTask(id);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
   return (
     <div>
       <h1>Todo List</h1>
@@ -38,15 +58,17 @@ export default function TodoList() {
         <input
           type="text"
           value={newTaskTitle}
-          onChange={e => setNewTaskTitle(e.target.value)}
+          onChange={(e) => setNewTaskTitle(e.target.value)}
         />
         <button onClick={handleAddTask}>Add Task</button>
       </div>
       <div>
-        {tasks.map(task => (
-          <Task
+        {tasks.map((task) => (
+          <TaskItem
             key={task.id}
-            {...task}
+            task={task}
+            onEdit={handleEditTask}
+            onDelete={handleDeleteTask}
           />
         ))}
       </div>
