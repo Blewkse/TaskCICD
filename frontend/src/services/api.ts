@@ -1,19 +1,14 @@
 import axios from "axios";
 
 const API_URL = "/api/tasks"; // Remplacez l'URL par l'URL de votre API
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-}
+import Task from "../types/Tasks";
 
 export const getTasks = async (): Promise<Task[]> => {
   try {
     const response = await axios.get(API_URL);
     return response.data;
   } catch (error) {
+    console.error("Error fetching tasks:", error);
     console.error("Error fetching tasks:", error);
     throw error;
   }
@@ -25,6 +20,7 @@ export const addTask = async (title: string): Promise<Task> => {
     return response.data;
   } catch (error) {
     console.error("Error adding task:", error);
+    console.error("Error adding task:", error);
     throw error;
   }
 };
@@ -35,6 +31,7 @@ export const updateTask = async (task: Task): Promise<Task> => {
     return response.data;
   } catch (error) {
     console.error("Error updating task:", error);
+    console.error("Error updating task:", error);
     throw error;
   }
 };
@@ -44,6 +41,8 @@ export const deleteTask = async (id: number): Promise<void> => {
     await axios.delete(`${API_URL}/${id}`);
   } catch (error) {
     console.error("Error deleting task:", error);
+    console.error("Error deleting task:", error);
     throw error;
   }
 };
+
