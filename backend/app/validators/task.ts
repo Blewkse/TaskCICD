@@ -4,6 +4,7 @@ export const createTaskBodyValidator = vine.compile(
   vine.object({
     name: vine.string(),
     description: vine.string().optional(),
+    isCompleted: vine.boolean(),
   })
 )
 

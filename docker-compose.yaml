@@ -1,0 +1,35 @@
+version: "3"
+services:
+  # -----------------------------------------------
+  # ------------------ FRONTEND -------------------
+  # -----------------------------------------------
+  frontend:
+    container_name: task-ci-cd-frontend
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/frontend
+      # Don't include node_modules in volume.
+      # When adding a dependency, the image has to be built again or we have to go into the container and install the dependency manually
+      - /frontend/node_modules/
+    ports:
+      - 4000:4000
+    restart: always
+
+  # -----------------------------------------------
+  # ------------------- BACKEND -------------------
+  # -----------------------------------------------
+  backend:
+    container_name: task-ci-cd-backend
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/backend
+      # Don't include node_modules in volume.
+      # When adding a dependency, the image has to be built again or we have to go into the container and install the dependency manually
+      - /backend/node_modules/
+    ports:
+      - 3333:3333
+    restart: always
