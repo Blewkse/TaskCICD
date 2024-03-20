@@ -15,7 +15,7 @@ services:
       # When adding a dependency, the image has to be built again or we have to go into the container and install the dependency manually
       - /frontend/node_modules/
     ports:
-      - 4000:4000
+      - 5173:5173
     restart: always
 
   # -----------------------------------------------
