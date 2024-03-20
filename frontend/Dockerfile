@@ -10,3 +10,5 @@ RUN corepack prepare pnpm@8.10.2 --activate
 RUN pnpm install
  
 EXPOSE 3000
+
+CMD [ "pnpm", "run", "dev" ]

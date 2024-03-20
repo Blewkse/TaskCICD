@@ -8,16 +8,19 @@ export default class extends BaseSeeder {
         id: 1,
         name: 'Task 1',
         description: 'Description of Task 1',
+        isCompleted: true,
       },
       {
         id: 2,
         name: 'Task 2',
         description: 'Description of Task 2',
+        isCompleted: true,
       },
       {
         id: 3,
         name: 'Task 3',
         description: 'Description of Task 3',
+        isCompleted: false,
       },
     ])
   }

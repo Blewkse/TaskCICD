@@ -11,5 +11,6 @@ RUN pnpm install
 
 COPY ./ ./
 
-CMD [ "pnpm", "dev" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
+
 EXPOSE 3333

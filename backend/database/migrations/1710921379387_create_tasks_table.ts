@@ -10,6 +10,8 @@ export default class extends BaseSchema {
       table.string('name').notNullable()
       table.text('description').nullable()
 
+      table.boolean('is_completed').defaultTo(false)
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
