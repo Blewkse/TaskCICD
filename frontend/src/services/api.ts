@@ -9,6 +9,7 @@ export const getTasks = async (): Promise<Task[]> => {
     return response.data;
   } catch (error) {
     console.error("Error fetching tasks:", error);
+    console.error("Error fetching tasks:", error);
     throw error;
   }
 };
@@ -18,6 +19,7 @@ export const addTask = async (title: string): Promise<Task> => {
     const response = await axios.post(API_URL, { title, completed: false });
     return response.data;
   } catch (error) {
+    console.error("Error adding task:", error);
     console.error("Error adding task:", error);
     throw error;
   }
@@ -29,6 +31,7 @@ export const updateTask = async (task: Task): Promise<Task> => {
     return response.data;
   } catch (error) {
     console.error("Error updating task:", error);
+    console.error("Error updating task:", error);
     throw error;
   }
 };
@@ -37,6 +40,7 @@ export const deleteTask = async (id: number): Promise<void> => {
   try {
     await axios.delete(`${API_URL}/${id}`);
   } catch (error) {
+    console.error("Error deleting task:", error);
     console.error("Error deleting task:", error);
     throw error;
   }
