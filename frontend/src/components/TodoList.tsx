@@ -5,6 +5,7 @@ import TaskItem from "./Task";
 export default function TodoList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskDescription, setNewTaskDescription] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -22,9 +23,10 @@ export default function TodoList() {
   const handleAddTask = async () => {
     try {
       if (newTaskTitle.trim() !== "") {
-        const newTask = await addTask(newTaskTitle);
-        setTasks([...tasks, newTask]);
+        const newTask = await addTask(newTaskTitle, newTaskDescription);
+        setTasks((prevTasks) => [...prevTasks, newTask]);
         setNewTaskTitle("");
+        setNewTaskDescription("");
       }
     } catch (error) {
       console.error("Error adding task:", error);
@@ -59,6 +61,13 @@ export default function TodoList() {
           value={newTaskTitle}
           onChange={(e) => setNewTaskTitle(e.target.value)}
         />
+        <br />
+        <input
+          type="text"
+          value={newTaskDescription}
+          onChange={(e) => setNewTaskDescription(e.target.value)}
+        />
+        <br />
         <button onClick={handleAddTask}>Add Task</button>
       </div>
       <div>

@@ -16,12 +16,11 @@ export const getTasks = async (): Promise<Task[]> => {
   }
 };
 
-export const addTask = async (title: string): Promise<Task> => {
+export const addTask = async (name: string, description: string): Promise<Task> => {
   try {
-    const response = await axios.post(API_URL, { title, completed: false });
+    const response = await axios.post(API_URL, { name, description, isCompleted: false });
     return response.data;
   } catch (error) {
-    console.error("Error adding task:", error);
     console.error("Error adding task:", error);
     throw error;
   }
