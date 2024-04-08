@@ -11,26 +11,23 @@
 
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
-
+//#region SonarQube Exclusions
 /**
  * URL to the application root. AdonisJS need it to resolve
  * paths to file and directories for scaffolding commands
  */
-// NOSONAR
 const APP_ROOT = new URL('../', import.meta.url)
 
 /**
  * The importer is used to import files in context of the
  * application.
  */
-// NOSONAR
 const IMPORTER = (filePath: string) => {
   if (filePath.startsWith('./') || filePath.startsWith('../')) {
     return import(new URL(filePath, APP_ROOT).href)
   }
   return import(filePath)
 }
-// NOSONAR
 new Ignitor(APP_ROOT, { importer: IMPORTER })
   .tap((app) => {
     app.booting(async () => {
@@ -45,4 +42,5 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     process.exitCode = 1
     prettyPrintError(error)
   })
-// NOSONAR
+//#endregion SonarQube Exclusions
+
