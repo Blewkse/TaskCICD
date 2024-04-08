@@ -11,7 +11,9 @@
 
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
+
 //#region SonarQube Exclusions
+
 /**
  * URL to the application root. AdonisJS need it to resolve
  * paths to file and directories for scaffolding commands
@@ -28,6 +30,7 @@ const IMPORTER = (filePath: string) => {
   }
   return import(filePath)
 }
+
 new Ignitor(APP_ROOT, { importer: IMPORTER })
   .tap((app) => {
     app.booting(async () => {
