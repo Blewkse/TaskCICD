@@ -45,7 +45,7 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
         app.terminate()
         resolve(true)
       })
-      return await p
+      await p
     })
   })
   .ace()
