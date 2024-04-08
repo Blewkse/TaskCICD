@@ -38,8 +38,30 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     app.booting(async () => {
       await import('#start/env')
     })
-    app.listen('SIGTERM', () => app.terminate())
-    app.listenIf(app.managedByPm2, 'SIGINT', () => app.terminate())
+    app.listen('SIGTERM', () =>
+      app
+        .terminate()
+        .then(() => {
+          console.log('Application terminated successfully.')
+          process.exit(0)
+        })
+        .catch((error) => {
+          console.error('Failed to terminate application:', error)
+          process.exit(1)
+        })
+    )
+    app.listenIf(app.managedByPm2, 'SIGINT', () =>
+      app
+        .terminate()
+        .then(() => {
+          console.log('Application terminated successfully.')
+          process.exit(0)
+        })
+        .catch((error) => {
+          console.error('Failed to terminate application:', error)
+          process.exit(1)
+        })
+    )
   })
   .testRunner()
   .configure(async (app) => {
