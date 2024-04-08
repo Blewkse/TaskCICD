@@ -9,6 +9,14 @@ jobs:
   build:
     name: Build and test
     runs-on: ubuntu-latest
+    env:
+      TZ: UTC
+      PORT: 3333
+      HOST: 0.0.0.0
+      LOG_LEVEL: info
+      APP_KEY: HHZ3YJZgLfy-V_4al6fwl4ALJN3Ytods
+      NODE_ENV: development
+      SESSION_DRIVER: cookie
     permissions: read-all
     steps:
       - uses: actions/checkout@v2
@@ -28,12 +36,23 @@ jobs:
         working-directory: ./frontend
 
       - name: Generate coverage report (Frontend)
-        run: npx nyc --reporter=text-lcov npm test > coverage.lcov
+        run: npx nyc --reporter=lcov npm test
         working-directory: ./frontend
+      - name: Install dependencies (Backend)
+        run: npm install
+        working-directory: ./backend
+
+      - name: Run tests (Backend)
+        run: npm test
+        working-directory: ./backend
+        # Assurez-vous que votre script "test" dans backend/package.json est configuré pour exécuter les tests Japa.
+
+      # Étape optionnelle: Générer un rapport de couverture de test pour SonarQube (Backend)
+      - name: Generate coverage report (Backend)
+        run: npx nyc --reporter=lcov npm test
+        working-directory: ./backend
 
       - uses: sonarsource/sonarqube-scan-action@master
-<<<<<<< HEAD
-=======
         with:
           args: >
             -Dsonar.projectKey=projet6
@@ -43,7 +62,6 @@ jobs:
             -Dsonar.coverage.exclusions=**/coverage/**/*
             -Dsonar.exclusions=**/coverage/**/*,**/node_modules/**/*
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
->>>>>>> 27bda6c (config sonar cube analysis 17)
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -54,6 +72,3 @@ jobs:
           #   timeout-minutes: 5
           #   env:
           #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.javascript.lcov.reportPaths=frontend/coverage/lcov.info
