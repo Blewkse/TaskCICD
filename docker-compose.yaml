@@ -37,12 +37,12 @@ services:
   # -----------------------------------------------
   # ------------------- JENKINS -------------------
   # -----------------------------------------------
-  jenkins:
-    image: jenkins/jenkins:lts
-    privileged: true
-    user: admin
-    ports:
-      - 8080:8080
-      - 50000:50000
-    container_name: jenkins
-    restart: always
+  # jenkins:
+  #   image: jenkins/jenkins:lts
+  #   privileged: true
+  #   user: admin
+  #   ports:
+  #     - 8080:8080
+  #     - 50000:50000
+  #   container_name: jenkins
+  #   restart: always
