@@ -65,4 +65,15 @@ describe("API tests", () => {
 
     await deleteTask(1);
   });
+
+  it("should handle errors when fetching tasks", async () => {
+    // Simuler une erreur lors de l'appel à getTasks
+    mockedAxios.get.mockRejectedValue(new Error("Failed to fetch tasks"));
+
+    try {
+      await getTasks();
+    } catch (error) {
+      mockedAxios.get.mockRejectedValue(new Error("Failed to fetch tasks"));
+    }
+  });
 });
