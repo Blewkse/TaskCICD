@@ -57,7 +57,7 @@ jobs:
           args: >
             -Dsonar.projectKey=projet6
             -Dsonar.sources=backend,frontend
-            -Dsonar.tests=backend/tests/unit/postx,frontend/src/__tests_
+            -Dsonar.tests=backend/tests/unit/post,frontend/src/__tests_
             -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts,**/*.spec.js,**/*.test.js
             -Dsonar.javascript.lcov.reportPaths=./backend/coverage.lcov,./frontend/coverage/coverage.lcov
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
