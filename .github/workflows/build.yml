@@ -41,7 +41,19 @@ jobs:
         run: npm test
         working-directory: ./frontend
 
+      - name: Generate coverage report (Frontend)
+        run: npx nyc --reporter=text-lcov npm test > coverage.lcov
+        working-directory: ./frontend
+
       - uses: sonarsource/sonarqube-scan-action@master
+        with:
+          args: >
+            -Dsonar.projectKey=projet6
+            -Dsonar.sources=backend,frontend
+            -Dsonar.tests=backend/test,frontend/test
+            -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts,**/*.spec.js,**/*.test.js
+            -Dsonar.javascript.lcov.reportPaths=./backend/coverage.lcov,./frontend/coverage.lcov
+        #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
