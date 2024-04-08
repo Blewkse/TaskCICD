@@ -7,13 +7,40 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build and test
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14" # Ajustez selon la version de Node.js utilisée par votre projet backend
+
+      - name: Install dependencies (Backend)
+        run: npm install
+        working-directory: ./backend
+
+      - name: Run tests (Backend)
+        run: npm test
+        working-directory: ./backend
+        # Assurez-vous que votre script "test" dans backend/package.json est configuré pour exécuter les tests Japa.
+
+      # Étape optionnelle: Générer un rapport de couverture de test pour SonarQube (Backend)
+      - name: Generate coverage report (Backend)
+        run: npx nyc --reporter=text-lcov npm test > coverage.lcov
+        working-directory: ./backend
+
+      - name: Install dependencies (Frontend)
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Run tests (Frontend)
+        run: npm test
+        working-directory: ./frontend
+
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
