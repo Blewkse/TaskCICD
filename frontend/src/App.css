@@ -130,22 +130,15 @@ p.task-name {
   font-size: 18px;
   text-transform: capitalize;
   font-weight: 600;
-}
-
-.task-top textarea.task-name {
-  resize: vertical;
-  min-height: auto;
   width: 100%;
   background: transparent;
   border: none;
   resize: none;
-  /* background: red; */
   color: white;
   font-weight: 600;
   font-size: 18px;
   height: auto;
   min-height: auto;
-  padding: 0;
   margin: 0;
   text-transform: capitalize;
   padding: 4px;
@@ -158,12 +151,10 @@ input.edit {
 
 textarea.task-description {
   background: transparent;
-  border: none;
   resize: none;
   color: grey;
   font-weight: 600;
   font-size: 14px;
-  padding: 0;
   margin: 0;
   height: 100%;
   width: calc(100% - 8px);
