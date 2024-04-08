@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14" # Ajustez selon la version de Node.js utilisée par votre projet backend
+          node-version: "21" # Ajustez selon la version de Node.js utilisée par votre projet backend
 
       - name: Install dependencies (Backend)
         run: npm install
