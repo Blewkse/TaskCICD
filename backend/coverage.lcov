@@ -1,0 +1,17 @@
+
+> backend@0.0.0 test
+> node ace test
+
+c[ info ] booting application to run tests...
+❯ Already up to date
+
+unit / Post[2m (tests/unit/post/create.spec.ts)[22m
+❯ Already up to date
+[ success ] Truncated tables successfully
+  [32m✔[39m [90mCreate task test[39m [2m(26.5ms)[22m
+[ success ] Truncated tables successfully
+
+[42m[30m PASSED [49m[39m
+
+[2mTests[22m  [32m1 passed[39m [2m(1)[22m
+ [2mTime[22m  [2m37ms[22m
