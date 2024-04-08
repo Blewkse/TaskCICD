@@ -2,4 +2,6 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  coverage: true,
+  coverageReporters: ['lcov'],
 };
