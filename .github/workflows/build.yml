@@ -32,6 +32,18 @@ jobs:
         working-directory: ./frontend
 
       - uses: sonarsource/sonarqube-scan-action@master
+<<<<<<< HEAD
+=======
+        with:
+          args: >
+            -Dsonar.projectKey=projet6
+            -Dsonar.sources=backend,frontend
+            -Dsonar.tests=backend/tests/unit/post,frontend/src/__tests__
+            -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts,**/*.spec.js,**/*.test.js
+            -Dsonar.coverage.exclusions=**/coverage/**/*
+            -Dsonar.exclusions=**/coverage/**/*,**/node_modules/**/*
+            -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
+>>>>>>> 27bda6c (config sonar cube analysis 17)
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
