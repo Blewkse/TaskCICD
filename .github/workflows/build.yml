@@ -36,8 +36,9 @@ jobs:
         working-directory: ./frontend
 
       - name: Generate coverage report (Frontend)
-        run: npx nyc --reporter=lcov npm test
+        run: npx nyc --reporter=text-lcov npm test > coverage.lcov
         working-directory: ./frontend
+
       - name: Install dependencies (Backend)
         run: npm install
         working-directory: ./backend
@@ -45,24 +46,12 @@ jobs:
       - name: Run tests (Backend)
         run: npm test
         working-directory: ./backend
-        # Assurez-vous que votre script "test" dans backend/package.json est configuré pour exécuter les tests Japa.
 
-      # Étape optionnelle: Générer un rapport de couverture de test pour SonarQube (Backend)
       - name: Generate coverage report (Backend)
         run: npx nyc --reporter=lcov npm test
         working-directory: ./backend
 
       - uses: sonarsource/sonarqube-scan-action@master
-        with:
-          args: >
-            -Dsonar.projectKey=projet6
-            -Dsonar.sources=backend,frontend
-            -Dsonar.tests=backend/tests/unit/post,frontend/src/__tests__
-            -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts,**/*.spec.js,**/*.test.js
-            -Dsonar.coverage.exclusions=**/coverage/**/*
-            -Dsonar.exclusions=**/coverage/**/*,**/node_modules/**/*
-            -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
-        #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
@@ -72,3 +61,8 @@ jobs:
           #   timeout-minutes: 5
           #   env:
           #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+        with:
+          args: >
+            -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
+        #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
