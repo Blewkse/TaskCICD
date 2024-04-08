@@ -49,7 +49,7 @@ describe('API tests', () => {
       name: 'New Task',
       description: 'New Description',
       isCompleted: false,
-      createdAt: '2022-01-01',
+
     });
   });
 
