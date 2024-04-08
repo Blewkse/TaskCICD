@@ -46,4 +46,4 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     process.exitCode = 1
     prettyPrintError(error)
   })
-//#endregion SonarQube Exclusions
+// NOSONAR
