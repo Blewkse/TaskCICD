@@ -7,7 +7,7 @@ export default class TasksController {
    * Return list of all posts or paginate through
    * them
    */
-  async index({}: HttpContext) {
+  async index() {
     return Task.all()
   }
 
@@ -17,7 +17,7 @@ export default class TasksController {
   async store({ request }: HttpContext) {
     const { name, description, isCompleted } = await request.validateUsing(createTaskBodyValidator)
 
-    return Task.create({ name, description, isCompleted})
+    return Task.create({ name, description, isCompleted })
   }
 
   /**
