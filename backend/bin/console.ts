@@ -32,20 +32,26 @@ const IMPORTER = (filePath: string) => {
   }
   return import(filePath)
 }
+
 new Ignitor(APP_ROOT, { importer: IMPORTER })
   .tap((app) => {
     app.booting(async () => {
       await import('#start/env')
     })
-    app.listen('SIGTERM', async () => {
-      await app.terminate()
-    })
-    app.listenIf(app.managedByPm2, 'SIGINT', async () => {
-      const p = new Promise((resolve) => {
-        app.terminate()
-        resolve(true)
+    app.listen('SIGTERM', () => {
+      app.terminate().catch((error) => {
+        console.error('Error terminating app:', error)
       })
-      await p
+    })
+    app.listenIf(app.managedByPm2, 'SIGINT', () => {
+      app
+        .terminate()
+        .then(() => {
+          console.log('App terminated successfully')
+        })
+        .catch((error) => {
+          console.error('Error terminating app:', error)
+        })
     })
   })
   .ace()
