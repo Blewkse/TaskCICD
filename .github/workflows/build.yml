@@ -59,6 +59,8 @@ jobs:
             -Dsonar.sources=backend,frontend
             -Dsonar.tests=backend/tests/unit/post,frontend/src/__tests__
             -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts,**/*.spec.js,**/*.test.js
+            -Dsonar.coverage.exclusions=**/coverage/**/*
+            -Dsonar.exclusions=**/coverage/**/*,**/node_modules/**/*
             -Dsonar.javascript.lcov.reportPaths=./backend/coverage.lcov,./frontend/coverage.lcov
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
         env:
