@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:62348/tasks"; // Remplacez l'URL par l'URL de votre API
+const API_URL = "http://0.0.0.0:3333/tasks"; // Remplacez l'URL par l'URL de votre API
 import Task from "../types/Tasks";
 
 export const getTasks = async (): Promise<Task[]> => {
