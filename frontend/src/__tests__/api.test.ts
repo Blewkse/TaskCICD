@@ -76,4 +76,42 @@ describe("API tests", () => {
       mockedAxios.get.mockRejectedValue(new Error("Failed to fetch tasks"));
     }
   });
+  it("should handle errors when adding a task", async () => {
+    // Simuler une erreur lors de l'appel à addTask
+    mockedAxios.post.mockRejectedValue(new Error("Failed to add a task"));
+
+    try {
+      await addTask("New Task", "New Description");
+    } catch (error) {
+      mockedAxios.post.mockRejectedValue(new Error("Failed to add a task"));
+    }
+  });
+  it("should handle errors when updating a task", async () => {
+    // Simuler une erreur lors de l'appel à updateTask
+    mockedAxios.put.mockRejectedValue(new Error("Failed to update a task"));
+
+    try {
+      await updateTask({
+        id: 1,
+        name: "Updated Task",
+        description: "Updated Description",
+        isCompleted: true,
+        createdAt: "2022-01-01",
+      });
+    } catch (error) {
+      mockedAxios.put.mockRejectedValue(new Error("Failed to update a task"));
+    }
+  });
+  it("should handle errors when deleting a task", async () => {
+    // Simuler une erreur lors de l'appel à deleteTask
+    mockedAxios.delete.mockRejectedValue(new Error("Failed to delete a task"));
+
+    try {
+      await deleteTask(1);
+    } catch (error) {
+      mockedAxios.delete.mockRejectedValue(
+        new Error("Failed to delete a task")
+      );
+    }
+  });
 });
