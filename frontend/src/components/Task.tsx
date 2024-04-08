@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Task from "../types/Tasks";
 
 type Props = {
@@ -11,6 +11,11 @@ export default function TaskItem({ task, onEdit, onDelete }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [activeTask, setActiveTask] = useState(task);
 
+  const formatDate = (dateString: string | number | Date) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString('fr-FR', options as Intl.DateTimeFormatOptions);
+  };
+
   const handleValidation = () => {
     setIsEditing(false);
     onEdit(activeTask);
@@ -20,34 +25,32 @@ export default function TaskItem({ task, onEdit, onDelete }: Props) {
     setActiveTask({ ...activeTask, [key]: value });
   };
 
+
+  
   return (
-    <div>
-      <input
-        disabled={!isEditing}
-        value={activeTask.name}
-        onChange={(event) => {
-          handleInputChange("name", event.target.value);
-        }}
-      ></input>
-      <div>
+    <div className="task-item">
+        <div className="task-top">
         <textarea
+          className="task-name"
+          disabled={!isEditing}
+          value={activeTask.name}
+          onChange={(event) => {
+            handleInputChange("name", event.target.value);
+          }}/>
+          <div className="date">
+          <p className="task-date">{formatDate(task.createdAt)}</p>
+          </div>
+        </div>
+        <textarea
+          className="task-description"
           disabled={!isEditing}
           value={activeTask.description}
           onChange={(event) => {
             handleInputChange("description", event.target.value);
-          }}
-        ></textarea>
-        <input
-          type="checkbox"
-          checked={activeTask.isCompleted}
-          disabled={!isEditing}
-          onChange={(event) => {
-            handleInputChange("isCompleted", event.target.checked);
-          }}
-        />
-        <div>
+          }}/>
+        <div className="btns">
           {isEditing ? (
-            <button onClick={handleValidation}>Valider</button>
+            <button onClick={handleValidation}>Confirm</button>
           ) : (
             <button onClick={() => setIsEditing(true)}>Edit</button>
           )}
@@ -60,6 +63,5 @@ export default function TaskItem({ task, onEdit, onDelete }: Props) {
           </button>
         </div>
       </div>
-    </div>
   );
 }

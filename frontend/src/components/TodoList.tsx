@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Task from "../types/Tasks";
 import { getTasks, addTask, deleteTask, updateTask } from "../services/api";
 import TaskItem from "./Task";
@@ -24,7 +24,7 @@ export default function TodoList() {
     try {
       if (newTaskTitle.trim() !== "") {
         const newTask = await addTask(newTaskTitle, newTaskDescription);
-        setTasks((prevTasks) => [...prevTasks, newTask]);
+        setTasks((prevTasks) => [newTask, ...prevTasks]);
         setNewTaskTitle("");
         setNewTaskDescription("");
       }
@@ -54,22 +54,30 @@ export default function TodoList() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="todolist">
+      <div className="add-task">
+        <label htmlFor="input" className="label">Task name</label>
         <input
           type="text"
           value={newTaskTitle}
           onChange={(e) => setNewTaskTitle(e.target.value)}
         />
-        <br />
+        <label htmlFor="textarea" className="label">Task infos</label>
         <textarea
           value={newTaskDescription}
           onChange={(e) => setNewTaskDescription(e.target.value)}
         />
-        <br />
         <button onClick={handleAddTask}>Add Task</button>
-      </div>
-      <div>
+    </div>
+
+    <div className="separator"></div>
+
+    <div className="task-count">
+    You have {tasks.length} tasks !
+    </div>
+
+    <div className="separator second"></div>
+
         {tasks.map((task) => (
           <TaskItem
             key={task.id}
@@ -78,7 +86,6 @@ export default function TodoList() {
             onDelete={handleDeleteTask}
           />
         ))}
-      </div>
     </div>
   );
 }
