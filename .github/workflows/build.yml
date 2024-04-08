@@ -19,6 +19,17 @@ jobs:
         with:
           node-version: "21" # Ajustez selon la version de Node.js utilisée par votre projet backend
 
+      - name: Install dependencies (Frontend)
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Run tests (Frontend)
+        run: npm test
+        working-directory: ./frontend
+
+      - name: Generate coverage report (Frontend)
+        run: npx nyc --reporter=text-lcov npm test > coverage.lcov
+        working-directory: ./frontend
       - name: Install dependencies (Backend)
         run: npm install
         working-directory: ./backend
@@ -32,18 +43,6 @@ jobs:
       - name: Generate coverage report (Backend)
         run: npx nyc --reporter=text-lcov npm test > coverage.lcov
         working-directory: ./backend
-
-      - name: Install dependencies (Frontend)
-        run: npm install
-        working-directory: ./frontend
-
-      - name: Run tests (Frontend)
-        run: npm test
-        working-directory: ./frontend
-
-      - name: Generate coverage report (Frontend)
-        run: npx nyc --reporter=text-lcov npm test > coverage.lcov
-        working-directory: ./frontend
 
       - uses: sonarsource/sonarqube-scan-action@master
         with:
