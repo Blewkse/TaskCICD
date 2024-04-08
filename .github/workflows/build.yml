@@ -36,7 +36,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Generate coverage report (Frontend)
-        run: npx nyc --reporter=lcov npm test && mv ./coverage/lcov.info ./coverage.lcov
+        run: npx nyc --reporter=lcov npm test
         working-directory: ./frontend
       - name: Install dependencies (Backend)
         run: npm install
@@ -49,7 +49,7 @@ jobs:
 
       # Étape optionnelle: Générer un rapport de couverture de test pour SonarQube (Backend)
       - name: Generate coverage report (Backend)
-        run: npx nyc --reporter=lcov npm test && mv ./coverage/lcov.info ./coverage.lcov
+        run: npx nyc --reporter=lcov npm test
         working-directory: ./backend
 
       - uses: sonarsource/sonarqube-scan-action@master
@@ -61,7 +61,7 @@ jobs:
             -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts,**/*.spec.js,**/*.test.js
             -Dsonar.coverage.exclusions=**/coverage/**/*
             -Dsonar.exclusions=**/coverage/**/*,**/node_modules/**/*
-            -Dsonar.javascript.lcov.reportPaths=./backend/coverage.lcov,./frontend/coverage.lcov
+            -Dsonar.javascript.lcov.reportPaths=./backend/coverage/lcov.info,./frontend/coverage/lcov.info
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
