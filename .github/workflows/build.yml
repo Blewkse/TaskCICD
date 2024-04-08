@@ -44,7 +44,6 @@ jobs:
         working-directory: ./backend
 
       - uses: sonarsource/sonarqube-scan-action@master
-        #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
@@ -54,6 +53,9 @@ jobs:
           #   timeout-minutes: 5
           #   env:
           #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
         with:
           args: >
-            -Dsonar.javascript.lcov.reportPaths=frontend/coverage/lcov.info,backend/coverage/lcov.info
+
+            -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
+        #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
