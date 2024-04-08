@@ -9,6 +9,14 @@ jobs:
   build:
     name: Build and test
     runs-on: ubuntu-latest
+    env:
+      TZ: UTC
+      PORT: 3333
+      HOST: 0.0.0.0
+      LOG_LEVEL: info
+      APP_KEY: HHZ3YJZgLfy-V_4al6fwl4ALJN3Ytods
+      NODE_ENV: development
+      SESSION_DRIVER: cookie
     permissions: read-all
     steps:
       - uses: actions/checkout@v2
@@ -56,6 +64,5 @@ jobs:
 
         with:
           args: >
-
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
