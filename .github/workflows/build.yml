@@ -25,8 +25,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "21" # Ajustez selon la version de Node.js utilisée par votre projet backend
-          registry-url: "http://20.229.185.215:8081/repository/projet6-backend/"
-          token: cHJvamV0Njp1c2VyNg==
 
       - name: Install dependencies (Frontend)
         run: npm ci
@@ -67,6 +65,10 @@ jobs:
           args: >
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
+
+      - name: Npm adduser
+        run: npm adduser --registry http://http://20.229.185.215:8081/repository/projet6-backend/
+        working-directory: ./backend
 
       - name: Setup .npmrc file to publish to Nexus
         run: echo "//http://20.229.185.215:8081/repository/projet6-backend/:_auth=cHJvamV0Njp1c2VyNg==" > .npmrc
