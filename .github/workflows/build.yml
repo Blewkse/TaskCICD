@@ -78,7 +78,7 @@ jobs:
       - name: Publish to Nexus Repository
         uses: sonatype-nexus-community/nexus-repo-github-action@1.0.0
         with:
-          serverUrl: http://20.229.185.215:8081/repository/projet6-backend/
+          serverUrl: http://20.229.185.215:8081/
           username: projet6
           password: user6
           format: npm
