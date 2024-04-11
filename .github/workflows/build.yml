@@ -66,7 +66,7 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
       - name: Build
-        run: npm run build
+        run: pnpm pack
 
       - name: Publish to Nexus Repository
         uses: sonatype-nexus-community/nexus-repo-github-action@1.0.0
@@ -78,4 +78,4 @@ jobs:
           repository: projet6-backend
           coordinates: groupId=com.example artifactId=my-package version=1.0.0
           assets: extension=tgz
-          filename: ./backend/dist/*.tgz
+          filename: ./backend/*.tgz
