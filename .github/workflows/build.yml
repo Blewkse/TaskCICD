@@ -28,7 +28,7 @@ jobs:
           registry-url: "http://20.229.185.215:8081/repository/projet6-backend/"
 
       - name: Install dependencies (Frontend)
-        run: npm install
+        run: npm ci
         working-directory: ./frontend
 
       - name: Run tests (Frontend)
@@ -40,7 +40,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Install dependencies (Backend)
-        run: npm install
+        run: npm ci
         working-directory: ./backend
 
       - name: Run tests (Backend)
