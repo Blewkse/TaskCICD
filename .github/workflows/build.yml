@@ -75,7 +75,7 @@ jobs:
           username: projet6
           password: user6
           format: npm
-          repository: npm-releases
+          repository: projet6-backend
           coordinates: groupId=com.example artifactId=my-package version=1.0.0
           assets: extension=tgz
           filename: ./backend/dist/*.tgz
