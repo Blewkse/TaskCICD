@@ -68,11 +68,11 @@ jobs:
       - name: Publish to Nexus frontend
         run: npm publish --registry http://20.229.185.215:8081/repository/projet6-frontend/
         env:
-          NODE_AUTH_TOKEN: projet6:user6
+          NODE_AUTH_TOKEN: cHJvamV0Njp1c2VyNg==
         working-directory: ./frontend
 
       - name: Publish to Nexus backend
         run: npm publish --registry http://20.229.185.215:8081/repository/projet6-backend/
         env:
-          NODE_AUTH_TOKEN: projet6:user6
+          NODE_AUTH_TOKEN: cHJvamV0Njp1c2VyNg==
         working-directory: ./backend
