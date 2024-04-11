@@ -65,6 +65,10 @@ jobs:
           args: >
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+        
       - name: Build
         run: pnpm pack
 
