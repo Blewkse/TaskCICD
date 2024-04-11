@@ -29,3 +29,6 @@ yarn-error.log
 .nyc_output
 
 .npmrc
+
+#remove tgz
+*.tgz
