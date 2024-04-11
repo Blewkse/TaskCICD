@@ -25,7 +25,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "21" # Ajustez selon la version de Node.js utilisée par votre projet backend
-          registry-url: "http://20.229.185.215:8081"
+          registry-url: "http://20.229.185.215:8081/repository/projet6-group/"
+          token: cHJvamV0Njp1c2VyNg==
 
       - name: Install dependencies (Frontend)
         run: npm i
