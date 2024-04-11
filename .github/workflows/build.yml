@@ -25,6 +25,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "21" # Ajustez selon la version de Node.js utilisée par votre projet backend
+          registry-url: "http://20.229.185.215:8081"
 
       - name: Install dependencies (Frontend)
         run: npm i
@@ -66,23 +67,12 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
 
-      
-      - name: Build
-        run: npm run build
+      - name: Setup .npmrc file to publish to Nexus
+        run: echo "//http://20.229.185.215:8081/repository/projet6-backend/:_auth=cHJvamV0Njp1c2VyNg==" > .npmrc
         working-directory: ./backend
 
-      - name: Pack 
-        run: npm pack
+      - name: Publish to Nexus backend
+        env:
+          NODE_AUTH_TOKEN: cHJvamV0Njp1c2VyNg==
+        run: npm publish
         working-directory: ./backend
-
-      - name: Publish to Nexus Repository
-        uses: sonatype-nexus-community/nexus-repo-github-action@1.0.0
-        with:
-          serverUrl: http://20.229.185.215:8081/
-          username: projet6
-          password: user6
-          format: npm
-          repository: projet6-backend
-          coordinates: groupId=com.example artifactId=my-package version=1.0.0
-          assets: extension=tgz
-          filename: ./backend/*.tgz
