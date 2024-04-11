@@ -66,11 +66,14 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info,frontend/coverage/lcov.info
         #Vous pouvez ajouter d'autres propriétés de configuration SonarQube ici au besoin
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-        
+      
       - name: Build
-        run: pnpm pack
+        run: npm run build
+        working-directory: ./backend
+
+      - name: Pack 
+        run: npm pack
+        working-directory: ./backend
 
       - name: Publish to Nexus Repository
         uses: sonatype-nexus-community/nexus-repo-github-action@1.0.0
