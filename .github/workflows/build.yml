@@ -27,7 +27,7 @@ jobs:
           node-version: "21" # Ajustez selon la version de Node.js utilisée par votre projet backend
 
       - name: Install dependencies (Frontend)
-        run: npm ci
+        run: npm i
         working-directory: ./frontend
 
       - name: Run tests (Frontend)
@@ -39,7 +39,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Install dependencies (Backend)
-        run: npm ci
+        run: npm i
         working-directory: ./backend
 
       - name: Run tests (Backend)
